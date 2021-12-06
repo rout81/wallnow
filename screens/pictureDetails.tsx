@@ -8,7 +8,6 @@ import { useGetPhotoDetailsQuery } from "../redux/services/photos";
 export default function PictureDetails({ route, navigation }) {
   const { id } = route.params;
   const { data, error, isLoading } = useGetPhotoDetailsQuery(id);
-  console.log(data);
   if (isLoading)
     return <ActivityIndicator animating={true} color={Colors.red800} />;
   if (data)
