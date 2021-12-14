@@ -13,23 +13,28 @@ import PictureDetails from "./screens/pictureDetails";
 import Test from "./screens/test";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <Provider store={store}>
-      <PaperProvider>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{ header: (props) => <Header {...props} /> }}
-            initialRouteName="Home"
-          >
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Details" component={PictureDetails} />
-          </Stack.Navigator>
-          <StatusBar style="auto" />
-        </NavigationContainer>
-      </PaperProvider>
+      <QueryClientProvider client={queryClient}>
+        <PaperProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{ header: (props) => <Header {...props} /> }}
+              initialRouteName="Home"
+            >
+              <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Details" component={PictureDetails} />
+            </Stack.Navigator>
+            <StatusBar style="auto" />
+          </NavigationContainer>
+        </PaperProvider>
+      </QueryClientProvider>
     </Provider>
   );
 }
