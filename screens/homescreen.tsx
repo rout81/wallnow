@@ -15,8 +15,11 @@ import { useGetCuratedPhotosQuery } from "../redux/services/photos";
 export default function HomeScreen({ navigation }) {
   const [page, setPage] = useState("1");
   const [perPage, setPerPage] = useState(30);
-  const curatedParams = { per_page: "30", page: page };
+  const curatedParams = { per_page: "80", page: page };
   // const { data, error, isLoading } = useGetCuratedPhotosQuery(curatedParams);
+  const getTotalPages = (perPage: number, totalPages: number) => {
+    return Math.ceil(totalPages / perPage);
+  };
   const fetchCurated = async ({ pageParam = 1 }) => {
     const response = await fetch(
       `https://api.pexels.com/v1/curated?per_page=30&page=${pageParam}`,
@@ -29,7 +32,7 @@ export default function HomeScreen({ navigation }) {
     );
     const results = await response.json();
     return {
-      results,
+      results: results,
       nextPage: pageParam + 1,
       totalPages: getTotalPages(perPage, results.total_results),
     };
@@ -42,8 +45,16 @@ export default function HomeScreen({ navigation }) {
         return undefined;
       },
     });
+  if (isLoading)
+    return <ActivityIndicator animating={true} color={Colors.red800} />;
+  if (isError)
+    return (
+      <View>
+        <Text>error</Text>
+      </View>
+    );
 
-    const allPhotos = data.pages.map(page => page.results.photos)
+  const allPhotos = data.pages.map((page) => page.results.photos);
 
   const renderImages = ({ item }) => (
     <Pressable
@@ -70,13 +81,9 @@ export default function HomeScreen({ navigation }) {
     // setPage(page + 1);
   };
 
-  const getTotalPages = (perPage: number, totalPages: number) => {
-    return Math.ceil(totalPages / perPage);
-  };
-
-  if (isLoading)
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
-  if (isError) return <Text>Error!</Text>;
+  // if (isLoading)
+  //   return <ActivityIndicator animating={true} color={Colors.red800} />;
+  // if (isError) return <Text>Error!</Text>;
 
   return (
     <View>
