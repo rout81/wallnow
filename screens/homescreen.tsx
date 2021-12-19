@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
   };
   const fetchCurated = async ({ pageParam = 1 }) => {
     const response = await fetch(
-      `https://api.pexels.com/v1/curated?per_page=30&page=${pageParam}`,
+      `https://api.pexels.com/v1/curated?per_page=80&page=${pageParam}`,
       {
         headers: {
           Authorization:
