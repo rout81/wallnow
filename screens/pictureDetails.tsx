@@ -9,13 +9,13 @@ export default function PictureDetails({ route, navigation }) {
   const { id } = route.params;
   const { data, error, isLoading } = useGetPhotoDetailsQuery(id);
   if (isLoading)
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
+    return <ActivityIndicator animating={true} style={{flex:1,alignItems:'center'}} size="large" color={Colors.red800} />;
   if (data)
     return (
       <View>
         <Image
           style={{ width: "100%", height: "100%" }}
-          resizeMode="contain"
+          resizeMode="cover"
           source={{ uri: data?.src?.large2x }}
         />
       </View>

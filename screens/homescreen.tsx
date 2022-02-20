@@ -46,7 +46,7 @@ export default function HomeScreen({ navigation }) {
       },
     });
   if (isLoading)
-    return <ActivityIndicator animating={true} color={Colors.red800} />;
+    return <ActivityIndicator style={{flex:1,alignItems:'center'}} animating={true} size="large" color={Colors.red800} />;
   if (isError)
     return (
       <View>
