@@ -10,19 +10,23 @@ import {
 import { ActivityIndicator, Button, TouchableRipple } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { useInfiniteQuery } from "react-query";
+import ScrollView from "../components/scrollView";
 import { useGetCuratedPhotosQuery } from "../redux/services/photos";
 
 export default function HomeScreen({ navigation }) {
   const [page, setPage] = useState("1");
   const [perPage, setPerPage] = useState(30);
+  const [searchType, setSearchType] = useState("/curated");
   const curatedParams = { per_page: "80", page: page };
   // const { data, error, isLoading } = useGetCuratedPhotosQuery(curatedParams);
   const getTotalPages = (perPage: number, totalPages: number) => {
     return Math.ceil(totalPages / perPage);
   };
+
   const fetchCurated = async ({ pageParam = 1 }) => {
+    const baseUrl = "https://api.pexels.com/v1/";
     const response = await fetch(
-      `https://api.pexels.com/v1/curated?per_page=80&page=${pageParam}`,
+      `${baseUrl}${searchType}?per_page=80&page=${pageParam}`,
       {
         headers: {
           Authorization:
@@ -38,43 +42,17 @@ export default function HomeScreen({ navigation }) {
     };
   };
 
-  const { data, isLoading, isError, hasNextPage, fetchNextPage } =
-    useInfiniteQuery("curated", fetchCurated, {
+  const { data, isLoading, isError, hasNextPage, fetchNextPage, refetch } =
+    useInfiniteQuery("curated", (nextPage) => fetchCurated(nextPage), {
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.nextPage < lastPage.totalPages) return lastPage.nextPage;
         return undefined;
       },
     });
-  if (isLoading)
-    return <ActivityIndicator style={{flex:1,alignItems:'center'}} animating={true} size="large" color={Colors.red800} />;
-  if (isError)
-    return (
-      <View>
-        <Text>error</Text>
-      </View>
-    );
+
+  console.log({ data });
 
   const allPhotos = data.pages.map((page) => page.results.photos);
-
-  const renderImages = ({ item }) => (
-    <Pressable
-      onPress={() => {
-        navigation.navigate("Details", {
-          id: item.id,
-        });
-      }}
-      style={{ width: "33%", marginBottom: ".5%" }}
-    >
-      <Image
-        style={{
-          width: "100%",
-          height: 200,
-          borderRadius: 5,
-        }}
-        source={{ uri: item.src.medium }}
-      />
-    </Pressable>
-  );
 
   const loadMore = () => {
     fetchNextPage();
@@ -86,23 +64,12 @@ export default function HomeScreen({ navigation }) {
   // if (isError) return <Text>Error!</Text>;
 
   return (
-    <View>
-      <FlatList
-        numColumns={3}
-        contentContainerStyle={{ margin: ".5%" }}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
-        data={allPhotos.flat()}
-        renderItem={renderImages}
-        onEndReachedThreshold={0.5}
-        onEndReached={loadMore}
-        keyExtractor={(item) => item.id}
-      />
-      <Pressable onPress={fetchNextPage}>
-        <Text>more</Text>
-      </Pressable>
-      {isLoading && (
-        <ActivityIndicator animating={true} color={Colors.red800} />
-      )}
-    </View>
+    <ScrollView
+      allPhotos={allPhotos}
+      isLoading={isLoading}
+      loadMore={fetchNextPage}
+      isError={isError}
+      navigation={navigation}
+    />
   );
 }
