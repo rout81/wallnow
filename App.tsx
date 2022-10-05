@@ -14,6 +14,7 @@ import Test from "./screens/test";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
+import SearchScreen from "./screens/searchScreen";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ export default function App() {
             >
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Details" component={PictureDetails} />
+              <Stack.Screen name="Search" component={SearchScreen} />
             </Stack.Navigator>
             <StatusBar style="auto" />
           </NavigationContainer>
