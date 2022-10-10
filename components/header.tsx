@@ -23,7 +23,7 @@ export default function Header({ back, navigation }) {
       {!isSearch && (
         <Appbar.Action
           icon="magnify"
-          onPress={() => setIsSearch((prevState) => !prevState)}
+          onPress={() => navigation.navigate("Search")}
         />
       )}
       {isSearch && (
@@ -35,7 +35,7 @@ export default function Header({ back, navigation }) {
         />
       )}
       {!isSearch && <Appbar.Action icon={MORE_ICON} onPress={() => {}} />}
-      <Portal>
+      {/* <Portal>
         <Modal
           visible={true}
           onDismiss={() => {}}
@@ -72,7 +72,7 @@ export default function Header({ back, navigation }) {
             <Text>Search</Text>
           </View>
         </Modal>
-      </Portal>
+      </Portal> */}
     </Appbar.Header>
   );
 }

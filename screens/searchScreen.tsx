@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Searchbar } from "react-native-paper";
 import { useInfiniteQuery } from "react-query";
 import ScrollView from "../components/scrollView";
@@ -6,6 +6,7 @@ import { fetchCurated, urls } from "../utills/api";
 
 const SearchScreen = ({ navigation }) => {
   const [searchInput, setSearchInput] = useState("");
+  const searchRef = useRef(null);
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
     useInfiniteQuery(
       ["curated", searchInput],
@@ -15,9 +16,12 @@ const SearchScreen = ({ navigation }) => {
           lastPage.nextPage < lastPage.totalPages ? lastPage.nextPage : null,
       }
     );
+
+  useEffect(() => searchRef.current.focus(), []);
   return (
     <>
       <Searchbar
+        ref={searchRef}
         placeholder="Search"
         onChangeText={(query: string) => setSearchInput(query)}
         value={searchInput}
