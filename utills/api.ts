@@ -7,7 +7,7 @@ interface iUrls {
 }
 
 export const urls: iUrls = {
-  curated: `${baseUrl}/curated${limit}`,
+  curated: `${baseUrl}/curated`,
   search: (query: string) => `${baseUrl}/search?query=${query}`,
 };
 

@@ -16,7 +16,7 @@ export default function Header({ back, navigation }) {
       ) : null}
       {!isSearch && (
         <Appbar.Content
-          title="WallNow"
+          title="WallHouse"
           subtitle={"Get Beautifull Wallpapers"}
         />
       )}

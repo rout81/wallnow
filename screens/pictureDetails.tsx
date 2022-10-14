@@ -123,7 +123,7 @@ export default function PictureDetails({ route, navigation }) {
         />
         <View
           style={{
-            backgroundColor: "rgba(201, 244, 240, 0.49)",
+            // backgroundColor: "rgba(201, 244, 240, 0.49)",
             // height: 45,
             width: "100%",
             position: "absolute",
@@ -137,15 +137,27 @@ export default function PictureDetails({ route, navigation }) {
             loading={isDownloading}
             disabled={isDownloading || !downloadedImage}
             onPress={saveFile}
-            mode="outlined"
+            mode="text"
             icon="download"
+            labelStyle={{
+              textTransform: "capitalize",
+              textShadowColor: "black",
+              textShadowRadius: 5,
+            }}
+            color="white"
           >
-            Download
+            Save
           </Button>
           <Button
             onPress={openShareDialogAsync}
-            mode="outlined"
+            mode="text"
             icon="wallpaper"
+            labelStyle={{
+              textTransform: "capitalize",
+              textShadowColor: "black",
+              textShadowRadius: 5,
+            }}
+            color="white"
           >
             Wallpaper
           </Button>
@@ -153,8 +165,14 @@ export default function PictureDetails({ route, navigation }) {
             onPress={openShareDialogAsync}
             disabled={isSharing || !downloadedImage}
             loading={isSharing}
-            mode="outlined"
+            mode="text"
             icon="share"
+            labelStyle={{
+              textTransform: "capitalize",
+              textShadowColor: "black",
+              textShadowRadius: 5,
+            }}
+            color="white"
           >
             Share
           </Button>
