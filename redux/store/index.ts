@@ -8,6 +8,8 @@ const reducer = combineReducers({
 
 export const store = configureStore({
   reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(photosApi.middleware),
 });
 
 setupListeners(store.dispatch);
