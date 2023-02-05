@@ -25,7 +25,6 @@ const SearchScreen = ({ navigation }) => {
         placeholder="Search"
         onChangeText={(query: string) => setSearchInput(query)}
         value={searchInput}
-        autoComplete={isLoading ? "loading" : "loading"}
       />
       <ScrollView
         allPhotos={data?.pages?.map((page) => page?.results?.photos)}
