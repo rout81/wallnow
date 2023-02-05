@@ -20,6 +20,8 @@
     "expo-permissions": "~14.0.0",
     "expo-sharing": "~11.0.1",
     "expo-status-bar": "~1.4.2",
+    "expo-updates": "~0.15.6",
+    "hermes-engine-cli": "^0.12.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",

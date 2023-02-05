@@ -11,9 +11,12 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/16cb633c-75c4-4d20-a542-8f51cd24c97d"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -29,8 +32,11 @@
     },
     "extra": {
       "eas": {
-        "projectId": "9690b0db-ef41-473c-8c3d-eeab02d64149"
+        "projectId": "16cb633c-75c4-4d20-a542-8f51cd24c97d"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }
