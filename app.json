@@ -6,9 +6,15 @@
     "orientation": "portrait",
     "icon": "assets/icon.png",
     "splash": {
-      "image": "assets/splash.mp4",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "video": {
+        "resizeMode": "cover",
+        "shouldPlay": true,
+        "source": {
+          "uri": "assets/splash.mp4"
+        }
+      }
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
