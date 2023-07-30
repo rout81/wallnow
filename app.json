@@ -4,9 +4,9 @@
     "slug": "wallhouse",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "assets/icon.png",
     "splash": {
-      "image": "./assets/splash.mp4",
+      "image": "assets/splash.mp4",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.wallhouse.satyaranjan"
     },
     "android": {
       "adaptiveIcon": {
