@@ -1,41 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Platform, TextInput, StatusBar } from "react-native";
-import { Appbar, Modal, Portal, Searchbar } from "react-native-paper";
-import Test from "../screens/test";
+import React, { useState } from "react";
+import { Platform } from "react-native";
+import { Appbar, Searchbar } from "react-native-paper";
 
 export default function Header({ back, navigation }) {
-  const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
-  const [isSearch, setIsSearch] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
-  return (
-    <Appbar.Header>
-      {back || isSearch ? (
-        <Appbar.BackAction
-          onPress={isSearch ? () => setIsSearch(false) : navigation.goBack}
-        />
-      ) : null}
-      {!isSearch && (
-        <Appbar.Content
-          title="WallHouse"
-          subtitle={"Get Beautifull Wallpapers"}
-        />
-      )}
-      {!isSearch && (
-        <Appbar.Action
-          icon="magnify"
-          onPress={() => navigation.navigate("Search")}
-        />
-      )}
-      {isSearch && (
-        <Searchbar
-          placeholder="Search"
-          onChangeText={(query: string) => setSearchInput(query)}
-          value={searchInput}
-          autoComplete={"searching"}
-        />
-      )}
-      {!isSearch && <Appbar.Action icon={MORE_ICON} onPress={() => {}} />}
-      {/* <Portal>
+	const MORE_ICON = Platform.OS === "ios" ? "dots-horizontal" : "dots-vertical";
+	const [isSearch, setIsSearch] = useState(false);
+	const [searchInput, setSearchInput] = useState("");
+	return (
+		<Appbar.Header>
+			{back || isSearch ? (
+				<Appbar.BackAction
+					onPress={isSearch ? () => setIsSearch(false) : navigation.goBack}
+				/>
+			) : null}
+			{!isSearch && (
+				<Appbar.Content
+					title="WallHouse"
+					subtitle={"Get Beautifull Wallpapers"}
+				/>
+			)}
+			{!isSearch && (
+				<Appbar.Action
+					icon="magnify"
+					onPress={() => navigation.navigate("Search")}
+				/>
+			)}
+			{isSearch && (
+				<Searchbar
+					placeholder="Search"
+					onChangeText={(query: string) => setSearchInput(query)}
+					value={searchInput}
+				/>
+			)}
+			{!isSearch && <Appbar.Action icon={MORE_ICON} onPress={() => {}} />}
+			{/* <Portal>
         <Modal
           visible={true}
           onDismiss={() => {}}
@@ -73,6 +71,6 @@ export default function Header({ back, navigation }) {
           </View>
         </Modal>
       </Portal> */}
-    </Appbar.Header>
-  );
+		</Appbar.Header>
+	);
 }
