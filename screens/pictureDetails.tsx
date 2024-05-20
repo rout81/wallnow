@@ -4,7 +4,6 @@ import { ActivityIndicator, Button, Snackbar } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { useGetPhotoDetailsQuery } from "../redux/services/photos";
 import * as FileSystem from "expo-file-system";
-import * as Permissions from "expo-permissions";
 import * as MediaLibrary from "expo-media-library";
 import * as Sharing from "expo-sharing";
 import * as ImageManipulator from "expo-image-manipulator";
